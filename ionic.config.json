@@ -1,0 +1,7 @@
+{
+  "name": "ubankFutbol",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
