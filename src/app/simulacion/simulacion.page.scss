@@ -1,0 +1,38 @@
+.toolbar-custom {
+  padding: 1.6rem;
+  height: 15vh;
+  display: inline-table;
+  width: 100%;
+  background-color: var(--ion-color-primary);
+  color: #fff;
+}
+
+.amount-total {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.primary-content {
+  position: relative;
+  height: 10vh;
+}
+
+.item-native {
+  padding-left: 0;
+  padding-inline-start: 0;
+}
+
+.item-inner {
+  padding-left: 1.6rem;
+}
+
+.text-detail{
+  font-size: 0.8rem;
+}
+
+.text-item-simulate{
+  font-size: 0.9rem;
+}

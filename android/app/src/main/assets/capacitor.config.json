@@ -1,0 +1,19 @@
+{
+  "appId": "io.ionic.ubankFutbol",
+  "appName": "ubankFutbol",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {},
+  "server": {
+    "url": "http://192.168.0.6:8104",
+    "cleartext": true,
+    "originalUrl": "http://192.168.0.6:8103",
+    "originalCleartext": true
+  }
+}

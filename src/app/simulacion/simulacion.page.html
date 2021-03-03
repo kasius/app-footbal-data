@@ -1,0 +1,60 @@
+<ion-header>
+  <div class="toolbar-custom">
+    <div class="amount-total"><small>Total Ahorrado: &nbsp;</small>
+      <span *ngIf="amount === 0; else amountValue">???</span>
+      <ng-template #amountValue>{{amount | currency}}</ng-template>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="primary-content">
+
+  <ion-grid>
+    <ion-row color="primary" justify-content-center>
+      <!-- size-md="6" size-lg="5" -->
+      <ion-col align-self-center offset="1" size="10">
+        <ion-button (click)="simulation();" expand="block">Realizar Simulación</ion-button>
+      </ion-col>
+      <ion-col align-self-center size="12">
+        <ion-card *ngFor="let meta of (listMetas$ | async)">
+          <ion-card-header>
+            <ion-card-subtitle>{{meta.name}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ng-container *ngIf="meta.reglas.length > 0; else notReglas">
+              <ng-container *ngFor="let regla of meta.reglas;let i=index;">
+                <ion-card-title>{{regla.equipoTxt}}</ion-card-title>
+                <ion-list-header class="margin-16 text-detail">
+                  <ion-label *ngIf="regla.amountSaved">{{regla.type}}<ion-badge *ngIf="regla.regitros" color="primary">{{regla.regitros.length}}
+                    </ion-badge> => <ion-label *ngIf="regla.amountSaved"> {{regla.amountSaved | currency}} USD
+                      recaudados</ion-label>
+                  </ion-label>
+                </ion-list-header>
+                <!-- <ion-container> -->
+                <!-- <ion-scroll class="scrollable"> -->
+                <ion-list>
+                  <ng-container *ngIf="regla.regitros && regla.regitros.length > 0; else notRegisters">
+                    <ion-item *ngFor="let registro of regla.regitros;" (click)="detailItem(registro.text);">
+                      <ion-label class="text-item-simulate">{{registro.text}}</ion-label>
+                    </ion-item>
+                  </ng-container>
+                  <ng-template #notRegisters>
+                    <small class="not-ruler">---</small>
+                  </ng-template>
+                </ion-list>
+                <!-- </ion-scroll> -->
+                <!-- </ion-container> -->
+              </ng-container>
+            </ng-container>
+            <ng-template #notReglas>
+              <small class="not-ruler">Sin reglas generadas...</small>
+            </ng-template>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="upFormMeta();" color="danger">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Metas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-list-expandable [data]="(listMetas$ | async)" (onShowClick)="onShowClick($event)"
+    (onEditMeta)="upFormMeta($event)">
+  </app-list-expandable>
+
+</ion-content>

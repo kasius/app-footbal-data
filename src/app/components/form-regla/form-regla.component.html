@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="modalDismiss();" defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{meta.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form *ngIf="formRegla" [formGroup]="formRegla" (ngSubmit)="addRuler(formRegla.value)">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-xs="12">
+          <div text-center>
+            <h3 class="pl20">Gestiona tu regla</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-label class="width-custom-30">Equipo:</ion-label>
+              <ion-select formControlName="equipoId" placeholder="Seleccione" [cancelText]="'Cerrar'" required>
+                <ion-select-option *ngFor="let equipo of equipos;" [value]="equipo.id">{{equipo.name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label class="width-custom-30">Tipo de regla:</ion-label>
+              <ion-select formControlName="type" placeholder="Seleccione" [cancelText]="'Cerrar'" required>
+                <ion-select-option [value]="Jugar">Jugar</ion-select-option>
+                <ion-select-option value="Ganar">Ganar</ion-select-option>
+                <ion-select-option value="por cada Goool!">por cada Goool!</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="amount" name="amount" type="number" placeholder="Monto en USD" required>
+              </ion-input>
+            </ion-item>
+            <ion-item
+              *ngIf="formRegla.get('amount').invalid && (formRegla.get('amount').dirty || formRegla.get('amount').touched)">
+              <ion-label color="danger">
+                Debes ingresar monto positivo
+              </ion-label>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="!formRegla.valid" expand="block">Guardar datos
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

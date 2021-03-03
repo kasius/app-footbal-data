@@ -1,0 +1,51 @@
+<ion-grid class="ion-no-padding">
+  <ion-row *ngIf="data != null">
+    <ion-col size="12" class="ion-no-padding">
+      <ion-list class="ion-padding-horizontal">
+        <ul class="collapsible ion-no-padding">
+          <li *ngFor="let meta of data;" class="ion-margin-top border border-radius">
+            <div class="collapsible-header">
+              <ion-item lines="none" class="default-item">
+                <ion-label (click)="toogleShow(meta)">
+                  <h2 class="text-color-primary text-size-md ion-text-wrap">{{meta.name}}</h2>
+                </ion-label>
+
+                <ion-icon (click)="goEditMeta(meta)" name="create-outline"></ion-icon>
+
+                <ion-icon *ngIf="!meta.show" (click)="toogleShow(meta)" name="caret-down-circle-outline"></ion-icon>
+                <ion-icon *ngIf="meta.show" (click)="toogleShow(meta)" name="caret-up-circle-outline"></ion-icon>
+              </ion-item>
+
+            </div>
+            <div class="item-accordion" [ngClass]="{'active': meta.show }" [hidden]="!meta.show">
+              <ion-item lines="none" class="default-item transparent">
+                <ion-label class="text-second">reglas <ion-badge color="medium">{{meta.reglas.length}}
+                  </ion-badge>
+                </ion-label>
+                <ion-button (click)="upFormGroup(meta);" color="primary">
+                  <ion-icon name="add-circle-outline"></ion-icon>
+                </ion-button>
+              </ion-item>
+              <div *ngIf="(meta.reglas &&meta.reglas.length > 0); else notReglas" class="row-reglas">
+                <ion-content>
+                  <ion-list>
+                    <ion-item *ngFor="regla of meta.reglas;let i=index;" (click)="editRuler(meta,meta.reglas[i])">
+                      <ion-label>
+                        <h2>{{meta.reglas[i].equipoTxt}}</h2>
+                        <h3>{{meta.reglas[i].type}}</h3>
+                        <p>{{meta.reglas[i].amount | currency}} </p>
+                      </ion-label>
+                    </ion-item>
+                  </ion-list>
+                </ion-content>
+              </div>
+              <ng-template #notReglas>
+                <small class="not-ruler">Sin reglas generadas...</small>
+              </ng-template>
+            </div>
+          </li>
+        </ul>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-grid>

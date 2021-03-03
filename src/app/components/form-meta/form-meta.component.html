@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="modalDismiss();" defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Formulario Meta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form *ngIf="formMeta" [formGroup]="formMeta" (ngSubmit)="addMeta(formMeta.value)">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <!-- size-md="6" size-lg="5" -->
+        <ion-col align-self-center size-xs="12">
+          <div text-center>
+            <h3 class="pl20">Gestionar tu Meta</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input formControlName="name" name="name" type="text" placeholder="Nombre Meta" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Tipo de meta</ion-label>
+              <ion-select formControlName="type" placeholder="Seleccione">
+                <ion-select-option value="1">Comprar algo</ion-select-option>
+                <ion-select-option value="2">Viajar</ion-select-option>
+                <ion-select-option value="3">Hacer algo</ion-select-option>
+                <ion-select-option value="4">Solo Ahorrar</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-datetime formControlName="date" name="date" required display-timezone="utc"
+                displayFormat="DD-MM-YYYY" [min]="datePlusMonth" monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic">
+              </ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="amount" name="amount" type="number" placeholder="Monto en USD" required>
+              </ion-input>
+            </ion-item>
+            <ion-item
+              *ngIf="formMeta.get('amount').invalid && (formMeta.get('amount').dirty || formMeta.get('amount').touched)">
+              <ion-label color="danger">
+                Debes ingresar monto positivo
+              </ion-label>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="!formMeta.valid" expand="block">Guardar datos
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
